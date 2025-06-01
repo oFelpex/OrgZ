@@ -2,9 +2,23 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1>Opa</h1>
-    </>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: "background.default",
+        color: "text.primary",
+      }}
+    >
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+            {mode === "dark" ? <BedtimeIcon /> : <Brightness7Icon />}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
 
