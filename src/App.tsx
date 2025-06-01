@@ -1,6 +1,16 @@
 import "./App.css";
 
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useColorMode } from "./hooks/useColorMode";
+
 function App() {
+  const { toggleColorMode, mode } = useColorMode();
+
   return (
     <Box
       sx={{
