@@ -1,6 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { Stack } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
@@ -17,23 +17,26 @@ export function NavBar() {
   return (
     <AppBar>
       <Toolbar>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <ButtonForIcon
-            tooltipTitle="Github Project"
-            href="https://github.com/oFelpex/OrgZ"
-            icon={<GitHubIcon />}
-          />
-          <ButtonForIcon
-            tooltipTitle="Portfolio Website"
-            href="https://felpex-portfolio.vercel.app/"
-            icon={<TravelExploreIcon />}
-          />
-
-          <ButtonForIcon
-            onClick={toggleColorMode}
-            icon={themeIcon}
-            tooltipTitle="Change Theme"
-          />
+        <Stack direction="row" width="100%" justifyContent="space-between">
+          <Typography variant="h3">OrgZ</Typography>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <ButtonForIcon
+              tooltipTitle="Github Project"
+              href="https://github.com/oFelpex/OrgZ"
+              icon={<GitHubIcon />}
+            />
+            <ButtonForIcon
+              tooltipTitle="Portfolio Website"
+              href="https://felpex-portfolio.vercel.app/"
+              icon={<TravelExploreIcon />}
+            />
+            <Divider orientation="vertical" variant="middle" />
+            <ButtonForIcon
+              onClick={toggleColorMode}
+              icon={themeIcon}
+              tooltipTitle="Change Theme"
+            />
+          </Stack>
         </Stack>
       </Toolbar>
     </AppBar>
