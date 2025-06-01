@@ -4,7 +4,7 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#1976d2", // azul padrão
+      main: "#fcfcfd",
     },
     secondary: {
       main: "#dc004e", // rosa padrão
