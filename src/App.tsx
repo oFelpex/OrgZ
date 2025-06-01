@@ -14,13 +14,7 @@ function App() {
         color: "text.primary",
       }}
     >
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
-            {mode === "dark" ? <BedtimeIcon /> : <Brightness7Icon />}
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
     </Box>
   );
 }
