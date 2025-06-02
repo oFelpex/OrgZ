@@ -1,7 +1,7 @@
 import "./App.css";
 
 import Box from "@mui/material/Box";
-import { NavBar } from "./components/NavBar/NavBar";
+import SideNavBar from "./components/SideNavBar/SideNavBar";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         color: "text.primary",
       }}
     >
-      <NavBar />
+      <SideNavBar />
     </Box>
   );
 }
