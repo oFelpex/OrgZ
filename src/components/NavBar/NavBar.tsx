@@ -1,5 +1,3 @@
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import { Divider, Stack, Typography } from "@mui/material";
 
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -10,35 +8,31 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { useColorMode } from "../../hooks/useColorMode";
 import { ButtonForIcon } from "../Buttons/ButtonForIcon/ButtonForIcon";
 
-export function NavBar() {
+export default function NavBar() {
   const { toggleColorMode, mode } = useColorMode();
   const themeIcon = mode === "dark" ? <BedtimeIcon /> : <Brightness7Icon />;
 
   return (
-    <AppBar>
-      <Toolbar>
-        <Stack direction="row" width="100%" justifyContent="space-between">
-          <Typography variant="h3">OrgZ</Typography>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <ButtonForIcon
-              tooltipTitle="Github Project"
-              href="https://github.com/oFelpex/OrgZ"
-              icon={<GitHubIcon />}
-            />
-            <ButtonForIcon
-              tooltipTitle="Portfolio Website"
-              href="https://felpex-portfolio.vercel.app/"
-              icon={<TravelExploreIcon />}
-            />
-            <Divider orientation="vertical" variant="middle" />
-            <ButtonForIcon
-              onClick={toggleColorMode}
-              icon={themeIcon}
-              tooltipTitle="Change Theme"
-            />
-          </Stack>
-        </Stack>
-      </Toolbar>
-    </AppBar>
+    <Stack direction="row" width="100%" justifyContent="space-between">
+      <Typography variant="h3">OrgZ</Typography>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <ButtonForIcon
+          tooltipTitle="Github Project"
+          href="https://github.com/oFelpex/OrgZ"
+          icon={<GitHubIcon />}
+        />
+        <ButtonForIcon
+          tooltipTitle="Portfolio Website"
+          href="https://felpex-portfolio.vercel.app/"
+          icon={<TravelExploreIcon />}
+        />
+        <Divider orientation="vertical" variant="middle" />
+        <ButtonForIcon
+          onClick={toggleColorMode}
+          icon={themeIcon}
+          tooltipTitle="Change Theme"
+        />
+      </Stack>
+    </Stack>
   );
 }
