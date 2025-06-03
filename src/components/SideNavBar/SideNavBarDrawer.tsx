@@ -7,10 +7,9 @@ export const SideNavBarDrawer = (
     <Toolbar />
     <Divider />
     <SelectPageContent />
-    {/* TRANSFORM INTO ANOTHER COMPONENT */}
-    <List>{/* LIST TO PUT SOME BUTONS */}</List>
     <Divider />
-    {/* TRANSFORM INTO ANOTHER COMPONENT */}
-    <List>{/* LIST TO PUT SOME OTHER BUTONS */}</List>
+    <List>{/* LIST TO PUT SOME BUTONS */}teste</List>
+    <Divider />
+    <List>{/* LIST TO PUT SOME OTHER BUTONS */}teste2</List>
   </div>
 );
