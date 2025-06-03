@@ -35,6 +35,12 @@ export default function SelectPageContent() {
               height: menuItem.value ? "55px" : "20px",
               borderRadius: 2,
               m: 1,
+              "&.Mui-selected": {
+                backgroundColor: "background.default",
+                ":hover": {
+                  backgroundColor: "background.default",
+                },
+              },
             }}
           >
             <SelectPageContentItem
