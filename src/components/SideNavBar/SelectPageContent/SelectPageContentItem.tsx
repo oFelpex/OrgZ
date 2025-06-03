@@ -13,9 +13,9 @@ export default function SelectPageContentItem({
   title,
   subTitle,
 }: SelectPageContentItemProps) {
-  let iconeEstilizado;
+  let stylizedIcon: ReactElement<SvgIconProps> | undefined;
   if (icon) {
-    iconeEstilizado = cloneElement(icon, {
+    stylizedIcon = cloneElement(icon, {
       sx: {
         borderRadius: "50%",
         bgcolor: "background.paper",
@@ -32,7 +32,7 @@ export default function SelectPageContentItem({
         gap: 2,
       }}
     >
-      {iconeEstilizado}
+      {stylizedIcon}
       <Box>
         <Typography variant="body2">{title}</Typography>
         <Typography variant="caption">{subTitle}</Typography>
