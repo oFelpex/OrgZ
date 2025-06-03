@@ -3,19 +3,14 @@ import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemButton from "@mui/material/ListItemButton";
-// import ListItemIcon from "@mui/material/ListItemIcon";
-// import ListItemText from "@mui/material/ListItemText";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 
 import NavBar from "../NavBar/NavBar";
-import SelectPageContent from "./SelectPageContent/SelectPageContent";
+import { SideNavBarDrawer } from "./SideNavBarDrawer";
 
 const drawerWidth = 240;
 
@@ -37,19 +32,6 @@ export default function SideNavBar() {
       setMobileOpen(!mobileOpen);
     }
   };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <SelectPageContent />
-      {/* TRANSFORM INTO ANOTHER COMPONENT */}
-      <List>{/* LIST TO PUT SOME BUTONS */}</List>
-      <Divider />
-      {/* TRANSFORM INTO ANOTHER COMPONENT */}
-      <List>{/* LIST TO PUT SOME OTHER BUTONS */}</List>
-    </div>
-  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -97,7 +79,7 @@ export default function SideNavBar() {
             },
           }}
         >
-          {drawer}
+          {SideNavBarDrawer}
         </Drawer>
         <Drawer
           variant="permanent"
@@ -110,7 +92,7 @@ export default function SideNavBar() {
           }}
           open
         >
-          {drawer}
+          {SideNavBarDrawer}
         </Drawer>
       </Box>
       <Box
