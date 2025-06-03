@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 
 import NavBar from "../NavBar/NavBar";
-import SelectPageContent from "./SelectPageContent";
+import SelectPageContent from "./SelectPageContent/SelectPageContent";
 
 const drawerWidth = 240;
 
