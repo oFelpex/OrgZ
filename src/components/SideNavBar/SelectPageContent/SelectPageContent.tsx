@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   FormControl,
   Select,
@@ -12,19 +10,19 @@ import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import SelectPageContentItem from "./SelectPageContentItem";
 import { menuItems, type Props } from "./menuItems";
 
-export default function SelectPageContent({ setSelectedSection }: Props) {
-  const [page, setPage] = useState("To-Do");
-
+export default function SelectPageContent({
+  selectedSection,
+  setSelectedSection,
+}: Props) {
   const handleChangePage = (event: SelectChangeEvent) => {
     const value = event.target.value as "To-Do" | "Notes" | "Calendar";
-    setPage(value);
     setSelectedSection(value);
   };
 
   return (
     <FormControl sx={{ width: "100%", p: 1.5 }}>
       <Select
-        value={page}
+        value={selectedSection}
         onChange={handleChangePage}
         IconComponent={UnfoldMoreIcon}
         sx={{ height: "65px" }}

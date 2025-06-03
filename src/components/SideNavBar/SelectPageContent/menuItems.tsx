@@ -14,6 +14,7 @@ export type Items = {
 };
 export type Props = {
   setSelectedSection: (section: "To-Do" | "Notes" | "Calendar") => void;
+  selectedSection: "To-Do" | "Notes" | "Calendar";
 };
 export const menuItems: Items[] = [
   {

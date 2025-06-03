@@ -16,7 +16,10 @@ import type { Props } from "./SelectPageContent/menuItems";
 
 const drawerWidth = 240;
 
-export default function SideNavBar({ setSelectedSection }: Props) {
+export default function SideNavBar({
+  selectedSection,
+  setSelectedSection,
+}: Props) {
   const isMobile: boolean = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -81,7 +84,7 @@ export default function SideNavBar({ setSelectedSection }: Props) {
                 left="50%"
                 sx={{ transform: "translateX(-50%)" }}
               >
-                To-Do
+                {selectedSection}
               </Typography>
             </Box>
           </Toolbar>
@@ -110,7 +113,10 @@ export default function SideNavBar({ setSelectedSection }: Props) {
             },
           }}
         >
-          <SideNavBarDrawer setSelectedSection={setSelectedSection} />
+          <SideNavBarDrawer
+            setSelectedSection={setSelectedSection}
+            selectedSection={selectedSection}
+          />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -123,7 +129,10 @@ export default function SideNavBar({ setSelectedSection }: Props) {
           }}
           open
         >
-          <SideNavBarDrawer setSelectedSection={setSelectedSection} />
+          <SideNavBarDrawer
+            setSelectedSection={setSelectedSection}
+            selectedSection={selectedSection}
+          />
         </Drawer>
       </Box>
     </>

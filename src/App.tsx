@@ -22,7 +22,10 @@ function App() {
         color: "text.primary",
       }}
     >
-      <SideNavBar setSelectedSection={setSelectedSection} />
+      <SideNavBar
+        setSelectedSection={setSelectedSection}
+        selectedSection={selectedSection}
+      />
       <Box
         component="main"
         sx={{
