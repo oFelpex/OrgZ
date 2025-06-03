@@ -10,7 +10,10 @@ export type Items = {
   title: string;
   subTitle?: string;
   icon?: ReactElement<SvgIconProps>;
-  value: string;
+  value: "To-Do" | "Notes" | "Calendar" | "";
+};
+export type Props = {
+  setSelectedSection: (section: "To-Do" | "Notes" | "Calendar") => void;
 };
 export const menuItems: Items[] = [
   {
