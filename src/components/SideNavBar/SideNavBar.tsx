@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 
@@ -11,10 +10,13 @@ import Toolbar from "@mui/material/Toolbar";
 
 import NavBar from "../NavBar/NavBar";
 import { SideNavBarDrawer } from "./SideNavBarDrawer";
+import { Divider, Typography } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const drawerWidth = 240;
 
 export default function SideNavBar() {
+  const isMobile: boolean = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -34,8 +36,7 @@ export default function SideNavBar() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <>
       <AppBar
         position="fixed"
         sx={{
@@ -55,6 +56,35 @@ export default function SideNavBar() {
           </IconButton>
           <NavBar />
         </Toolbar>
+        <Divider />
+
+        {/* NAV BAR EXTRA WHEN WIDTH < 600PX */}
+        {!isMobile && (
+          <Toolbar>
+            <Box
+              position="relative"
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <Typography
+                variant="h1"
+                sx={{ fontSize: "28px", fontWeight: "bold" }}
+              >
+                OrgZ
+              </Typography>
+              <Typography
+                variant="body1"
+                position="absolute"
+                left="50%"
+                sx={{ transform: "translateX(-50%)" }}
+              >
+                To-Do
+              </Typography>
+            </Box>
+          </Toolbar>
+        )}
       </AppBar>
       <Box
         component="nav"
@@ -95,16 +125,6 @@ export default function SideNavBar() {
           {SideNavBarDrawer}
         </Drawer>
       </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-      </Box>
-    </Box>
+    </>
   );
 }

@@ -1,9 +1,13 @@
 import "./App.css";
 
-import Box from "@mui/material/Box";
-import SideNavBar from "./components/SideNavBar/SideNavBar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
+import Box from "@mui/material/Box";
+
+import SideNavBar from "./components/SideNavBar/SideNavBar";
 function App() {
+  const isMobile: boolean = useMediaQuery("(min-width:600px)");
+
   return (
     <Box
       sx={{
@@ -15,6 +19,18 @@ function App() {
       }}
     >
       <SideNavBar />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          ml: isMobile ? "240px" : "0px",
+          width: { sm: `calc(100% - 240px)` },
+          mt: isMobile ? "120px" : "60px",
+        }}
+      >
+        conteúdo principal
+      </Box>
     </Box>
   );
 }
