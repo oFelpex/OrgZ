@@ -1,15 +1,18 @@
 import { Divider, List, Toolbar } from "@mui/material";
 
 import SelectPageContent from "./SelectPageContent/SelectPageContent";
+import type { Props } from "./SelectPageContent/menuItems";
 
-export const SideNavBarDrawer = (
-  <div>
-    <Toolbar />
-    <Divider />
-    <SelectPageContent />
-    <Divider />
-    <List>{/* LIST TO PUT SOME BUTONS */}teste</List>
-    <Divider />
-    <List>{/* LIST TO PUT SOME OTHER BUTONS */}teste2</List>
-  </div>
-);
+export default function SideNavBarDrawer({ setSelectedSection }: Props) {
+  return (
+    <div>
+      <Toolbar />
+      <Divider />
+      <SelectPageContent setSelectedSection={setSelectedSection} />
+      <Divider />
+      <List>{/* LIST TO PUT SOME BUTONS */}teste</List>
+      <Divider />
+      <List>{/* LIST TO PUT SOME OTHER BUTONS */}teste2</List>
+    </div>
+  );
+}

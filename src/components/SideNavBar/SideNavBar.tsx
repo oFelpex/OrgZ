@@ -4,18 +4,19 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-
-import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-
-import NavBar from "../NavBar/NavBar";
-import { SideNavBarDrawer } from "./SideNavBarDrawer";
 import { Divider, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+import MenuIcon from "@mui/icons-material/Menu";
+
+import NavBar from "../NavBar/NavBar";
+import SideNavBarDrawer from "./SideNavBarDrawer";
+import type { Props } from "./SelectPageContent/menuItems";
+
 const drawerWidth = 240;
 
-export default function SideNavBar() {
+export default function SideNavBar({ setSelectedSection }: Props) {
   const isMobile: boolean = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -109,7 +110,7 @@ export default function SideNavBar() {
             },
           }}
         >
-          {SideNavBarDrawer}
+          <SideNavBarDrawer setSelectedSection={setSelectedSection} />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -122,7 +123,7 @@ export default function SideNavBar() {
           }}
           open
         >
-          {SideNavBarDrawer}
+          <SideNavBarDrawer setSelectedSection={setSelectedSection} />
         </Drawer>
       </Box>
     </>

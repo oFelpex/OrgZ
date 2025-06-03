@@ -10,13 +10,15 @@ import {
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 import SelectPageContentItem from "./SelectPageContentItem";
-import { menuItems } from "./menuItems";
+import { menuItems, type Props } from "./menuItems";
 
-export default function SelectPageContent() {
+export default function SelectPageContent({ setSelectedSection }: Props) {
   const [page, setPage] = useState("To-Do");
 
   const handleChangePage = (event: SelectChangeEvent) => {
-    setPage(event.target.value);
+    const value = event.target.value as "To-Do" | "Notes" | "Calendar";
+    setPage(value);
+    setSelectedSection(value);
   };
 
   return (
