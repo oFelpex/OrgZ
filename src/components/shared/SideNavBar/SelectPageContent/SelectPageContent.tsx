@@ -8,12 +8,12 @@ import {
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 import SelectPageContentItem from "./SelectPageContentItem";
-import { menuItems, type Props } from "./menuItems";
+import { menuItems, type SelectPageProps } from "./menuItems";
 
 export default function SelectPageContent({
   selectedSection,
   setSelectedSection,
-}: Props) {
+}: SelectPageProps) {
   const handleChangePage = (event: SelectChangeEvent) => {
     const value = event.target.value as "To-Do" | "Notes" | "Calendar";
     setSelectedSection(value);
@@ -27,8 +27,9 @@ export default function SelectPageContent({
         IconComponent={UnfoldMoreIcon}
         sx={{ height: "65px" }}
       >
-        {menuItems.map((menuItem) => (
+        {menuItems.map((menuItem, idx) => (
           <MenuItem
+            key={idx}
             disabled={menuItem.value ? false : true}
             value={menuItem.value}
             sx={{
