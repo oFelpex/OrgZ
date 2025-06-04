@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Divider, Paper, Typography } from "@mui/material";
 
 interface TodoColumnProps {
   title: string;
@@ -9,11 +9,19 @@ export function TodoColumn({ title, items }: TodoColumnProps) {
   return (
     <Paper
       elevation={3}
-      sx={{ flex: 1, p: 2, bgcolor: "background.paper", borderRadius: 2 }}
+      sx={{
+        m: 0,
+        p: 2,
+        bgcolor: "background.paper",
+        borderRadius: 1,
+        minWidth: 177,
+        width: "100%",
+      }}
     >
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
+      <Divider sx={{ mb: 2, mt: 1 }} />
       {items.map((item, idx) => (
         <Box
           key={idx}
