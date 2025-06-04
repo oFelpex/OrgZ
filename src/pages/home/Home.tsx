@@ -27,11 +27,10 @@ export default function Home({ selectedSection }: SelectPageProps) {
       component="main"
       sx={{
         flexGrow: 1,
-        p: 3,
+        p: 1,
         ml: isMobile ? "240px" : "0px",
         mt: isMobile ? "64px" : "110px",
-        height: "100vh",
-        bgcolor: "red",
+        width: isMobile ? "calc(100vw - 240px)" : "100vw",
       }}
     >
       {renderContent()}
