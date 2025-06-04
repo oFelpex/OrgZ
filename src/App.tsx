@@ -2,16 +2,16 @@ import "./App.css";
 
 import { useState } from "react";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 
-import SideNavBar from "./components/SideNavBar/SideNavBar";
+import SideNavBar from "./components/shared/SideNavBar/SideNavBar";
+import Home from "./pages/home/Home";
 
 function App() {
-  const isMobile: boolean = useMediaQuery("(min-width:600px)");
   const [selectedSection, setSelectedSection] = useState<
     "To-Do" | "Notes" | "Calendar"
   >("To-Do");
+
   return (
     <Box
       sx={{
@@ -26,18 +26,10 @@ function App() {
         setSelectedSection={setSelectedSection}
         selectedSection={selectedSection}
       />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          ml: isMobile ? "240px" : "0px",
-          width: { sm: `calc(100% - 240px)` },
-          mt: isMobile ? "60px" : "110px",
-        }}
-      >
-        conteúdo principal {selectedSection}
-      </Box>
+      <Home
+        selectedSection={selectedSection}
+        setSelectedSection={setSelectedSection}
+      />
     </Box>
   );
 }
