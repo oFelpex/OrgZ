@@ -12,14 +12,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import NavBar from "../NavBar/NavBar";
 import SideNavBarDrawer from "./SideNavBarDrawer";
-import type { Props } from "./SelectPageContent/menuItems";
+import type { SelectPageProps } from "./SelectPageContent/menuItems";
 
 const drawerWidth = 240;
 
 export default function SideNavBar({
   selectedSection,
   setSelectedSection,
-}: Props) {
+}: SelectPageProps) {
   const isMobile: boolean = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);

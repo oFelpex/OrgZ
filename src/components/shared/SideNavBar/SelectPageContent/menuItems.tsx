@@ -12,7 +12,7 @@ export type Items = {
   icon?: ReactElement<SvgIconProps>;
   value: "To-Do" | "Notes" | "Calendar" | "";
 };
-export type Props = {
+export type SelectPageProps = {
   setSelectedSection: (section: "To-Do" | "Notes" | "Calendar") => void;
   selectedSection: "To-Do" | "Notes" | "Calendar";
 };

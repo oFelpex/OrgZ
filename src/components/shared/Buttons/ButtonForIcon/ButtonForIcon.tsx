@@ -1,5 +1,5 @@
 import IconButton from "@mui/material/IconButton";
-import { useColorMode } from "../../../hooks/useColorMode";
+import { useColorMode } from "../../../../hooks/useColorMode";
 import { Tooltip } from "@mui/material";
 
 type ButtonForIconProps = {

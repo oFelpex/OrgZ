@@ -6,7 +6,7 @@ import BedtimeIcon from "@mui/icons-material/Bedtime";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { useColorMode } from "../../hooks/useColorMode";
+import { useColorMode } from "../../../hooks/useColorMode";
 import { ButtonForIcon } from "../Buttons/ButtonForIcon/ButtonForIcon";
 export default function NavBar() {
   const isMobile: boolean = useMediaQuery("(min-width:600px)");
