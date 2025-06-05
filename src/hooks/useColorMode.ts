@@ -1,9 +1,6 @@
 import { createContext, useContext } from "react";
 
-interface ColorModeContextType {
-  toggleColorMode: () => void;
-  mode: "light" | "dark";
-}
+import type { ColorModeContextType } from "../types/colorModeContext";
 
 export const useColorMode = () => {
   const context = useContext(ColorModeContext);

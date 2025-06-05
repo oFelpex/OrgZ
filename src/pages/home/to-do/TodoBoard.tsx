@@ -1,18 +1,10 @@
-import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
-import { TodoColumn } from "./components/TodoColumn";
 import { useState, type SyntheticEvent } from "react";
 
-const mockData = {
-  todo: ["Estudar React", "Fazer exercícios"],
-  inProgress: ["Aprendendo MUI"],
-  done: ["Configurar projeto"],
-};
+import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import { TodoColumn } from "./components/TodoColumn";
+import { todoData } from "../../../data/todoData";
+import type { TabPanelProps } from "../../../types/tabPanelProps";
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -30,10 +22,10 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: number) {
+function addTabProps(index: string): { id: string; "aria-controls": string } {
   return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    id: `column-${index}`,
+    "aria-controls": `tabpanel-${index}`,
   };
 }
 
@@ -56,9 +48,9 @@ export default function TodoBoard() {
             minHeight: "80vh",
           }}
         >
-          <TodoColumn title="To Do" items={mockData.todo} />
-          <TodoColumn title="On Going" items={mockData.inProgress} />
-          <TodoColumn title="Done" items={mockData.done} />
+          <TodoColumn title="To Do" items={todoData.todo} />
+          <TodoColumn title="On Going" items={todoData.onGoing} />
+          <TodoColumn title="Done" items={todoData.done} />
         </Box>
       );
     case true:
@@ -78,19 +70,19 @@ export default function TodoBoard() {
               aria-label="basic tabs example"
               centered
             >
-              <Tab label="To-Do" {...a11yProps(0)} />
-              <Tab label="In Progress" {...a11yProps(1)} />
-              <Tab label="Done" {...a11yProps(2)} />
+              <Tab label="To-Do" {...addTabProps("todo")} />
+              <Tab label="On Going" {...addTabProps("on-going")} />
+              <Tab label="Done" {...addTabProps("done")} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <TodoColumn title="To Do" items={mockData.todo} />
+            <TodoColumn title="To Do" items={todoData.todo} />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            <TodoColumn title="In Progress" items={mockData.inProgress} />
+            <TodoColumn title="In Progress" items={todoData.onGoing} />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            <TodoColumn title="Done" items={mockData.done} />
+            <TodoColumn title="Done" items={todoData.done} />
           </CustomTabPanel>
         </Box>
       );

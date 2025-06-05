@@ -1,23 +1,15 @@
-import {
-  useState,
-  useMemo,
-  useEffect,
-  useCallback,
-  type ReactNode,
-  type FC,
-} from "react";
+import { useState, useMemo, useEffect, useCallback, type FC } from "react";
+
 import {
   ThemeProvider as MuiThemeProvider,
   type Theme,
 } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+
 import lightTheme from "../themes/lightTheme";
 import darkTheme from "../themes/darkTheme";
 import { ColorModeContext } from "../hooks/useColorMode";
-
-interface ThemeContextProviderProps {
-  children: ReactNode;
-}
+import type { ThemeContextProviderProps } from "../types/themeContextProviderProps";
 
 export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({
   children,
