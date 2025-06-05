@@ -1,5 +1,10 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
 
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
+import { ButtonForIcon } from "../../../../components/shared/Buttons/ButtonForIcon/ButtonForIcon";
 interface TodoColumnProps {
   title: string;
   items: string[];
@@ -18,9 +23,16 @@ export function TodoColumn({ title, items }: TodoColumnProps) {
         width: "100%",
       }}
     >
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h6" fontSize={18}>
+          {title}
+        </Typography>
+        <Box display="flex" gap={1}>
+          <ButtonForIcon icon={<NoteAddIcon />} />
+          <ButtonForIcon icon={<EditNoteIcon />} />
+          <ButtonForIcon icon={<DeleteForeverIcon />} />
+        </Box>
+      </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
       {items.map((item, idx) => (
         <Box
