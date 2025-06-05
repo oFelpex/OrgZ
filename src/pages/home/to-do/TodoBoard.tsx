@@ -38,7 +38,7 @@ function a11yProps(index: number) {
 }
 
 export default function TodoBoard() {
-  const responsivite: boolean = useMediaQuery("(min-width:800px)");
+  const responsivite: boolean = useMediaQuery("(min-width:1024px)");
 
   const [value, setValue] = useState(0);
 
@@ -57,7 +57,7 @@ export default function TodoBoard() {
           }}
         >
           <TodoColumn title="To Do" items={mockData.todo} />
-          <TodoColumn title="In Progress" items={mockData.inProgress} />
+          <TodoColumn title="On Going" items={mockData.inProgress} />
           <TodoColumn title="Done" items={mockData.done} />
         </Box>
       );
