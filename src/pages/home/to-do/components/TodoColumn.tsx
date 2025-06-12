@@ -1,6 +1,7 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
 import TodoColumnButtons from "./TodoColumnButtons";
 import type { TodoColumnProps } from "../../../../types/todoColumnProps";
+import { TodoDialogProvider } from "../../../../contexts/TodoDialogContext ";
 
 export function TodoColumn({
   title,
@@ -29,12 +30,14 @@ export function TodoColumn({
           {title}
         </Typography>
         <Box display="flex" gap={1}>
-          <TodoColumnButtons
-            category={category}
-            onAdd={handleAdd}
-            onDelete={handleDelete}
-            onUpdate={handleUpdate}
-          />
+          <TodoDialogProvider>
+            <TodoColumnButtons
+              category={category}
+              onAdd={handleAdd}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
+          </TodoDialogProvider>
         </Box>
       </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
@@ -46,7 +49,6 @@ export function TodoColumn({
             mb: 1,
             borderRadius: 1,
             boxShadow: 1,
-            bgcolor: "#f9f9f9",
           }}
           id={item.id}
         >

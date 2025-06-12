@@ -1,8 +1,10 @@
+import { useTodoDialogs } from "../../../../contexts/TodoDialogContext ";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { ButtonForIcon } from "../../../../components/shared/Buttons/ButtonForIcon/ButtonForIcon";
 import type { TasksData } from "../../../../types/todoTypes";
+import TodoDialogs from "./TodoDialogs";
 
 interface Props {
   category: keyof TasksData;
@@ -17,18 +19,23 @@ export default function TodoColumnButtons({
   onUpdate,
   onDelete,
 }: Props) {
+  const { handleOpen } = useTodoDialogs();
+
   const handleAddClick = () => {
+    handleOpen("add");
     const title = prompt("Título da nova tarefa:");
     if (title) onAdd(category, title);
   };
 
   const handleEditClick = () => {
+    handleOpen("edit");
     const id = prompt("ID da tarefa a editar:");
     const newTitle = prompt("Novo título:");
     if (id && newTitle) onUpdate(category, id, newTitle);
   };
 
   const handleDeleteClick = () => {
+    handleOpen("delete");
     const id = prompt("ID da tarefa a deletar:");
     if (id) onDelete(category, id);
   };
@@ -38,6 +45,7 @@ export default function TodoColumnButtons({
       <ButtonForIcon icon={<NoteAddIcon />} onClick={handleAddClick} />
       <ButtonForIcon icon={<EditNoteIcon />} onClick={handleEditClick} />
       <ButtonForIcon icon={<DeleteForeverIcon />} onClick={handleDeleteClick} />
+      <TodoDialogs />
     </>
   );
 }
