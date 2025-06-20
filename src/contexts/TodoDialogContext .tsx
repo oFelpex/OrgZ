@@ -1,10 +1,12 @@
 // context/TodoDialogContext.tsx
 import { createContext, useContext, useState } from "react";
 
+type ActionType = "add" | "edit" | "delete";
+
 const TodoDialogContext = createContext<{
   open: boolean;
-  handleOpen: (dialogType: string) => void;
-  dialogTypeToOpen: string;
+  handleOpen: (dialogType: ActionType) => void;
+  dialogTypeToOpen: ActionType;
   handleClose: () => void;
 } | null>(null);
 
@@ -14,9 +16,9 @@ export const TodoDialogProvider = ({
   children: React.ReactNode;
 }) => {
   const [open, setOpen] = useState(false);
-  const [dialogTypeToOpen, setdialogTypeToOpen] = useState("add");
+  const [dialogTypeToOpen, setdialogTypeToOpen] = useState<ActionType>("add");
 
-  const handleOpen = (dialogType: string) => {
+  const handleOpen = (dialogType: ActionType) => {
     console.log("opa", open, dialogType);
     setdialogTypeToOpen(dialogType);
     setOpen(true);

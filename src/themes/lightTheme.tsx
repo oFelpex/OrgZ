@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, type Theme } from "@mui/material/styles";
 
-const lightTheme = createTheme({
+const lightTheme: Theme = createTheme({
   palette: {
     mode: "light",
     primary: {
@@ -14,12 +14,24 @@ const lightTheme = createTheme({
       paper: "#ffffff", // branco para cards, papéis...
     },
     text: {
-      primary: "#212121", // preto quase total
+      primary: "#212529", // preto quase total
       secondary: "#757575", // cinza - texto secundário
     },
   },
   typography: {
     fontFamily: "Roboto, sans-serif",
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "#0077b6",
+          "&:hover": {
+            backgroundColor: "#EAEAEA",
+          },
+        },
+      },
+    },
   },
 });
 

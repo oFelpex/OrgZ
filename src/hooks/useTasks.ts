@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { addTask, deleteTask, updateTask } from "../services/taskService";
-import type { TasksData } from "../types/todoTypes";
+import type { Task, TasksData } from "../types/todoTypes";
 
 export function useTasks() {
   const [tasks, setTasks] = useState<TasksData>({
@@ -33,8 +33,8 @@ export function useTasks() {
     fetchTasks();
   }, []);
 
-  const handleAdd = (category: keyof TasksData, title: string) => {
-    addTask(tasks, category, title).then(setTasks);
+  const handleAdd = (category: keyof TasksData, newTask: Task) => {
+    addTask(tasks, category, newTask).then(setTasks);
   };
 
   const handleDelete = (category: keyof TasksData, id: string) => {

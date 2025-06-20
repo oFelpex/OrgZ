@@ -1,20 +1,21 @@
 import type { Task, TasksData } from "../types/todoTypes";
 
-const createTask = (title: string): Task => ({
+const createTask = (newTask: Task): Task => ({
   id: crypto.randomUUID(),
-  title,
-  dateCreation: new Date(),
-  dateBegin: new Date(),
-  dateFinish: new Date(),
-  done: false,
+  title: newTask.title,
+  description: newTask.description,
+  dateCreation: newTask.dateCreation,
+  dateBegin: newTask.dateBegin,
+  dateFinish: newTask.dateFinish,
+  important: newTask.important,
 });
 
 export const addTask = async (
   tasks: TasksData,
   category: keyof TasksData,
-  title: string
+  newTask: Task
 ): Promise<TasksData> => {
-  const newTask = createTask(title);
+  const CreatedNewTask = createTask(newTask);
 
   try {
     const response = await fetch(`http://localhost:3000/${category}`, {
@@ -22,14 +23,14 @@ export const addTask = async (
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newTask),
+      body: JSON.stringify(CreatedNewTask),
     });
 
     if (!response.ok) throw new Error("Erro ao adicionar tarefa.");
 
     return {
       ...tasks,
-      [category]: [...tasks[category], newTask],
+      [category]: [...tasks[category], CreatedNewTask],
     };
   } catch (error) {
     console.error("Erro em addTask:", error);

@@ -8,7 +8,6 @@ export interface Task {
   dateBegin: Date;
   dateFinish: Date;
   important?: boolean;
-  done: boolean;
 }
 export interface TasksData {
   todo: Task[];
