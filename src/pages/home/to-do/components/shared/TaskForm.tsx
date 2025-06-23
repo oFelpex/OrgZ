@@ -18,12 +18,15 @@ import type {
   TasksData,
   TodoSection,
 } from "../../../../../types/todoTypes";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs, { Dayjs } from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 type TaskFormData = {
   title: string;
   description: string;
-  dateBegin: Date;
-  dateFinish: Date;
+  dateBegin: Dayjs | null;
+  dateFinish: Dayjs | null;
   important: boolean;
   status: TodoSection;
 };
@@ -34,12 +37,12 @@ interface Props {
   onDelete: (category: keyof TasksData, id: string) => void;
 }
 
-export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
+export const TaskForm = ({ category, onAdd }: Props) => {
   const [formData, setFormData] = useState<TaskFormData>({
     title: "",
     description: "",
-    dateBegin: new Date(),
-    dateFinish: new Date(),
+    dateBegin: dayjs(),
+    dateFinish: dayjs().add(1, "day"),
     important: false,
     status: category,
   });
@@ -55,6 +58,16 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
     }));
   };
 
+  const handleDateChange = (
+    field: "dateBegin" | "dateFinish",
+    value: Dayjs | null
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setFormData((prev) => ({
@@ -66,27 +79,33 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
   const handleStatusChange = (statusValue: TodoSection) => {
     setFormData((prev) => ({
       ...prev,
-      status: prev.status === statusValue ? "todo" : statusValue, // Desmarca se clicar de novo
+      status: prev.status === statusValue ? "todo" : statusValue,
     }));
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Tarefa criada:", formData);
-    // Aqui você pode fazer o POST para o backend ou salvar no estado global
-    const test: Task = {
+
+    const task: Task = {
       id: crypto.randomUUID(),
       dateCreation: new Date(),
       ...formData,
+      dateBegin: formData.dateBegin ? formData.dateBegin.toDate() : new Date(),
+      dateFinish: formData.dateFinish
+        ? formData.dateFinish.toDate()
+        : new Date(),
     };
-    onAdd(formData.status, test);
+    onAdd(formData.status, task);
+
+    console.log("Tarefa criada:", task);
+    handleClose();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack spacing={2} maxWidth={400}>
+      <Stack spacing={2} maxWidth={400} padding={1}>
         <TextField
-          label="Nome da Tarefa"
+          label="Task Name"
           name="title"
           value={formData.title}
           onChange={handleChange}
@@ -94,33 +113,29 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
         />
 
         <TextField
-          label="Descrição"
+          label="Description"
           name="description"
           value={formData.description}
           onChange={handleChange}
-          multiline
+          multiline // change in the future
           rows={3}
         />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Start Date"
+            name="dateBegin"
+            value={formData.dateBegin}
+            onChange={(newValue) => handleDateChange("dateBegin", newValue)}
+          />
 
-        <TextField
-          label="Data de Início"
-          name="dateBegin"
-          type="date"
-          value={formData.dateBegin}
-          onChange={handleChange}
-          InputLabelProps={{ shrink: true }}
-          required
-        />
-
-        <TextField
-          label="Data de Término"
-          name="dateFinish"
-          type="date"
-          value={formData.dateFinish}
-          onChange={handleChange}
-          InputLabelProps={{ shrink: true }}
-          required
-        />
+          <DatePicker
+            label="Finish Date"
+            name="dateFinish"
+            defaultValue={formData.dateFinish}
+            value={formData.dateFinish}
+            onChange={(newValue) => handleDateChange("dateFinish", newValue)}
+          />
+        </LocalizationProvider>
         <Box>
           <FormControlLabel
             control={
@@ -152,6 +167,11 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
         </Box>
 
         <FormControlLabel
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
           control={
             <Checkbox
               checked={formData.important}
@@ -159,7 +179,7 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
               name="important"
             />
           }
-          label="Importante"
+          label="Important"
         />
 
         <Box display="flex" justifyContent="left">
@@ -176,7 +196,6 @@ export const TaskForm = ({ category, onAdd, onUpdate, onDelete }: Props) => {
             type="submit"
             variant="contained"
             color="primary"
-            onClick={handleClose}
           >
             Create Task
           </Button>
