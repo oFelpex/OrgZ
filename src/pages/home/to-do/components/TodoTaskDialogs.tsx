@@ -3,8 +3,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTodoDialogs } from "../../../../contexts/TodoDialogContext ";
-import { TaskForm } from "./shared/TaskForm";
+import { TaskForm } from "./shared/TaskForm/TaskForm";
 import type { Task, TasksData } from "../../../../types/todoTypes";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 type ActionType = "add" | "edit" | "delete";
 interface Props {
@@ -16,9 +18,9 @@ interface Props {
 export default function TodoTaskDialogs({
   category,
   onAdd,
-  onUpdate,
-  onDelete,
-}: Props) {
+}: // onUpdate,
+// onDelete,
+Props) {
   const fullScreen: boolean = useMediaQuery("(min-width:600px)");
   const { open, dialogTypeToOpen, handleClose } = useTodoDialogs();
 
@@ -38,12 +40,14 @@ export default function TodoTaskDialogs({
     >
       <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <TaskForm
-          category={category}
-          onAdd={onAdd}
-          onDelete={onDelete}
-          onUpdate={onUpdate}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TaskForm
+            category={category}
+            onAdd={onAdd}
+            // onDelete={onDelete}
+            // onUpdate={onUpdate}
+          />
+        </LocalizationProvider>
       </DialogContent>
     </Dialog>
   );
