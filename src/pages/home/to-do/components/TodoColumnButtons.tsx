@@ -9,7 +9,7 @@ import TodoTaskDialogs from "./TodoTaskDialogs";
 interface Props {
   category: keyof TasksData;
   onAdd: (category: keyof TasksData, newTask: Task) => void;
-  onUpdate: (category: keyof TasksData, id: string, title: string) => void;
+  onUpdate: (category: keyof TasksData, id: string, updatedTask: Task) => void;
   onDelete: (category: keyof TasksData, id: string) => void;
 }
 
@@ -27,9 +27,6 @@ export default function TodoColumnButtons({
 
   const handleEditClick = () => {
     handleOpen("edit");
-    const id = prompt("ID da tarefa a editar:");
-    const newTitle = prompt("Novo título:");
-    if (id && newTitle) onUpdate(category, id, newTitle);
   };
 
   const handleDeleteClick = () => {

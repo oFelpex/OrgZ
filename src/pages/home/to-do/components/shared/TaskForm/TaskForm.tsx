@@ -15,6 +15,7 @@ import { StatusCheckboxes } from "./TaskFormComponents/StatusCheckboxes";
 import { ImportantCheckbox } from "./TaskFormComponents/ImportantCheckbox";
 import { FormButtons } from "./TaskFormComponents/FormButtons";
 import { useTodoDialogs } from "../../../../../../contexts/TodoDialogContext ";
+import type { ActionType } from "../../TodoTaskDialogs";
 
 type TaskFormData = {
   title: string;
@@ -28,9 +29,18 @@ type TaskFormData = {
 interface Props {
   category: keyof TasksData;
   onAdd: (category: keyof TasksData, newTask: Task) => void;
+  onUpdate: (category: keyof TasksData, id: string, newTask: Task) => void;
+  onDelete: (category: keyof TasksData, id: string) => void;
+  dialogTypeToOpen: ActionType;
 }
 
-export const TaskForm = ({ category, onAdd }: Props) => {
+export const TaskForm = ({
+  dialogTypeToOpen,
+  category,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: Props) => {
   const [formData, setFormData] = useState<TaskFormData>({
     title: "",
     description: "",
@@ -87,11 +97,21 @@ export const TaskForm = ({ category, onAdd }: Props) => {
           ? formData.dateFinish.toDate()
           : new Date(),
       };
+      switch (dialogTypeToOpen) {
+        case "add":
+          onAdd(formData.status, task);
+          break;
+        case "edit":
+          onUpdate(formData.status, task.id, task);
+          break;
+        case "delete":
+          onDelete(formData.status, task.id);
+          break;
+      }
 
-      onAdd(formData.status, task);
       handleClose();
     },
-    [formData, onAdd, handleClose]
+    [formData, dialogTypeToOpen, handleClose, onAdd, onUpdate, onDelete]
   );
 
   return (

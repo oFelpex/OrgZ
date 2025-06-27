@@ -67,7 +67,7 @@ export const updateTask = async (
   tasks: TasksData,
   category: keyof TasksData,
   taskId: string,
-  newTitle: string
+  updatedTask: Task
 ): Promise<TasksData> => {
   try {
     const response = await fetch(
@@ -77,7 +77,7 @@ export const updateTask = async (
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: newTitle }),
+        body: JSON.stringify({ updatedTask }),
       }
     );
 
@@ -86,7 +86,7 @@ export const updateTask = async (
     return {
       ...tasks,
       [category]: tasks[category].map((task) =>
-        task.id === taskId ? { ...task, title: newTitle } : task
+        task.id === taskId ? { ...task, updatedTask } : task
       ),
     };
   } catch (error) {

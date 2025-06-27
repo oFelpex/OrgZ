@@ -44,9 +44,9 @@ export function useTasks() {
   const handleUpdate = (
     category: keyof TasksData,
     id: string,
-    title: string
+    updatedTask: Task
   ) => {
-    updateTask(tasks, category, id, title).then(setTasks);
+    updateTask(tasks, category, id, updatedTask).then(setTasks);
   };
 
   return { tasks, handleAdd, handleDelete, handleUpdate };

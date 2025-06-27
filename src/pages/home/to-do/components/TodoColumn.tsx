@@ -1,7 +1,7 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
 import TodoColumnButtons from "./TodoColumnButtons";
 import type { TodoColumnProps } from "../../../../types/todoColumnProps";
-import { TodoDialogProvider } from "../../../../contexts/TodoDialogContext ";
+import { useTodoDialogs } from "../../../../contexts/TodoDialogContext ";
 
 export function TodoColumn({
   title,
@@ -11,6 +11,8 @@ export function TodoColumn({
   handleDelete,
   handleUpdate,
 }: TodoColumnProps) {
+  const { handleOpen } = useTodoDialogs();
+
   return (
     <Paper
       elevation={3}
@@ -30,14 +32,12 @@ export function TodoColumn({
           {title}
         </Typography>
         <Box display="flex" gap={1}>
-          <TodoDialogProvider>
-            <TodoColumnButtons
-              category={category}
-              onAdd={handleAdd}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-            />
-          </TodoDialogProvider>
+          <TodoColumnButtons
+            category={category}
+            onAdd={handleAdd}
+            onUpdate={handleUpdate}
+            onDelete={handleDelete}
+          />
         </Box>
       </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
@@ -51,6 +51,7 @@ export function TodoColumn({
             boxShadow: 1,
           }}
           id={item.id}
+          onClick={() => handleOpen("edit", item)}
         >
           <Typography fontWeight="bold">{item.title}</Typography>
           <Typography variant="caption" fontSize={10}>

@@ -8,19 +8,19 @@ import type { Task, TasksData } from "../../../../types/todoTypes";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-type ActionType = "add" | "edit" | "delete";
+export type ActionType = "add" | "edit" | "delete";
 interface Props {
   category: keyof TasksData;
   onAdd: (category: keyof TasksData, newTask: Task) => void;
-  onUpdate: (category: keyof TasksData, id: string, title: string) => void;
+  onUpdate: (category: keyof TasksData, id: string, updatedTask: Task) => void;
   onDelete: (category: keyof TasksData, id: string) => void;
 }
 export default function TodoTaskDialogs({
   category,
   onAdd,
-}: // onUpdate,
-// onDelete,
-Props) {
+  onUpdate,
+  onDelete,
+}: Props) {
   const fullScreen: boolean = useMediaQuery("(min-width:600px)");
   const { open, dialogTypeToOpen, handleClose } = useTodoDialogs();
 
@@ -42,10 +42,11 @@ Props) {
       <DialogContent>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TaskForm
+            dialogTypeToOpen={dialogTypeToOpen}
             category={category}
             onAdd={onAdd}
-            // onDelete={onDelete}
-            // onUpdate={onUpdate}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
           />
         </LocalizationProvider>
       </DialogContent>
