@@ -8,16 +8,20 @@ import TodoTaskDialogs from "./TodoTaskDialogs";
 
 interface Props {
   category: keyof TasksData;
-  onAdd: (category: keyof TasksData, newTask: Task) => void;
-  onUpdate: (category: keyof TasksData, id: string, updatedTask: Task) => void;
-  onDelete: (category: keyof TasksData, id: string) => void;
+  handleAdd: (category: keyof TasksData, newTask: Task) => void;
+  handleUpdate: (
+    category: keyof TasksData,
+    id: string,
+    updatedTask: Task
+  ) => void;
+  handleDelete: (category: keyof TasksData, id: string) => void;
 }
 
 export default function TodoColumnButtons({
   category,
-  onAdd,
-  onUpdate,
-  onDelete,
+  handleAdd,
+  handleUpdate,
+  handleDelete,
 }: Props) {
   const { handleOpen } = useTodoDialogs();
 
@@ -32,19 +36,22 @@ export default function TodoColumnButtons({
   const handleDeleteClick = () => {
     handleOpen("delete");
     const id = prompt("ID da tarefa a deletar:");
-    if (id) onDelete(category, id);
+    if (id) handleDelete(category, id);
   };
+  console.log("AQUIIIIIIIIII");
 
   return (
     <>
       <ButtonForIcon icon={<NoteAddIcon />} onClick={handleAddClick} />
       <ButtonForIcon icon={<EditNoteIcon />} onClick={handleEditClick} />
       <ButtonForIcon icon={<DeleteForeverIcon />} onClick={handleDeleteClick} />
+
+      {/* MOVER ISSO AQUI */}
       <TodoTaskDialogs
         category={category}
-        onAdd={onAdd}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
+        handleAdd={handleAdd}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
       />
     </>
   );

@@ -1,10 +1,11 @@
 import { useState, type SyntheticEvent } from "react";
-import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
+import { Box, Paper, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import { TodoColumn } from "./components/TodoColumn";
 import type { TabPanelProps } from "../../../types/tabPanelProps";
 import { useTasks } from "../../../hooks/useTasks";
 import { TodoDialogProvider } from "../../../contexts/TodoDialogContext ";
+import TodoColumnButtons from "./components/TodoColumnButtons";
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -17,7 +18,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
     </div>
   );
 }
@@ -47,12 +48,31 @@ export default function TodoBoard() {
   if (responsivite) {
     return (
       <TodoDialogProvider>
+        <Paper
+          elevation={3}
+          sx={{
+            bgcolor: "background.paper",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: 60,
+          }}
+        >
+          <Box display="flex" gap={1}>
+            <TodoColumnButtons
+              category={"todo"}
+              handleAdd={handleAdd}
+              handleUpdate={handleUpdate}
+              handleDelete={handleDelete}
+            />
+          </Box>
+        </Paper>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             gap: 1,
-            minHeight: "80vh",
+            mt: 1,
           }}
         >
           <TodoColumn
@@ -84,11 +104,16 @@ export default function TodoBoard() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: 2,
-          minHeight: "80vh",
+          gap: 1,
+          mt: 1,
         }}
       >
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box
+          sx={{
+            borderBottom: 1,
+            borderColor: "divider",
+          }}
+        >
           <Tabs
             value={value}
             onChange={handleChange}
@@ -100,6 +125,25 @@ export default function TodoBoard() {
             <Tab label="Done" {...addTabProps("done")} />
           </Tabs>
         </Box>
+        <Paper
+          elevation={3}
+          sx={{
+            bgcolor: "background.paper",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: 60,
+          }}
+        >
+          <Box display="flex" gap={1}>
+            <TodoColumnButtons
+              category={"todo"}
+              handleAdd={handleAdd}
+              handleUpdate={handleUpdate}
+              handleDelete={handleDelete}
+            />
+          </Box>
+        </Paper>
         <CustomTabPanel value={value} index={0}>
           <TodoColumn
             title="To Do"

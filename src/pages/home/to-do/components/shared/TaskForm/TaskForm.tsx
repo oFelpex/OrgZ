@@ -28,18 +28,18 @@ type TaskFormData = {
 
 interface Props {
   category: keyof TasksData;
-  onAdd: (category: keyof TasksData, newTask: Task) => void;
-  onUpdate: (category: keyof TasksData, id: string, newTask: Task) => void;
-  onDelete: (category: keyof TasksData, id: string) => void;
+  handleAdd: (category: keyof TasksData, newTask: Task) => void;
+  handleUpdate: (category: keyof TasksData, id: string, newTask: Task) => void;
+  handleDelete: (category: keyof TasksData, id: string) => void;
   dialogTypeToOpen: ActionType;
 }
 
 export const TaskForm = ({
   dialogTypeToOpen,
   category,
-  onAdd,
-  onUpdate,
-  onDelete,
+  handleAdd,
+  handleUpdate,
+  handleDelete,
 }: Props) => {
   const [formData, setFormData] = useState<TaskFormData>({
     title: "",
@@ -99,19 +99,26 @@ export const TaskForm = ({
       };
       switch (dialogTypeToOpen) {
         case "add":
-          onAdd(formData.status, task);
+          handleAdd(formData.status, task);
           break;
         case "edit":
-          onUpdate(formData.status, task.id, task);
+          handleUpdate(formData.status, task.id, task);
           break;
         case "delete":
-          onDelete(formData.status, task.id);
+          handleDelete(formData.status, task.id);
           break;
       }
 
       handleClose();
     },
-    [formData, dialogTypeToOpen, handleClose, onAdd, onUpdate, onDelete]
+    [
+      formData,
+      dialogTypeToOpen,
+      handleClose,
+      handleAdd,
+      handleUpdate,
+      handleDelete,
+    ]
   );
 
   return (

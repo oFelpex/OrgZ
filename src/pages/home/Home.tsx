@@ -3,13 +3,14 @@ import type { SelectPageProps } from "../../components/shared/SideNavBar/SelectP
 
 import Calendar from "./calendar/CalendarBoard";
 import Notes from "./notes/NotesBoard";
-import type { JSX } from "react";
+import { useMemo } from "react";
 import TodoBoard from "./to-do/TodoBoard";
+import type { JSX } from "@emotion/react/jsx-runtime";
 
 export default function Home({ selectedSection }: SelectPageProps) {
   const isMobile: boolean = useMediaQuery("(min-width:600px)");
 
-  function renderContent(): JSX.Element {
+  const content: JSX.Element = useMemo(() => {
     switch (selectedSection) {
       case "To-Do":
         return <TodoBoard />;
@@ -20,7 +21,7 @@ export default function Home({ selectedSection }: SelectPageProps) {
       default:
         return <>Something goes wrong, and I don't know what haha</>;
     }
-  }
+  }, [selectedSection]);
 
   return (
     <Box
@@ -33,7 +34,7 @@ export default function Home({ selectedSection }: SelectPageProps) {
         width: isMobile ? "calc(100vw - 240px)" : "100vw",
       }}
     >
-      {renderContent()}
+      {content}
     </Box>
   );
 }
