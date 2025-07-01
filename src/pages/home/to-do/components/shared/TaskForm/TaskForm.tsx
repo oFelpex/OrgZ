@@ -1,4 +1,10 @@
-import { useState, type ChangeEvent, type FormEvent, useCallback } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  useCallback,
+  useEffect,
+} from "react";
 import { Stack } from "@mui/material";
 import type {
   Task,
@@ -23,11 +29,11 @@ type TaskFormData = {
   dateBegin: Dayjs | null;
   dateFinish: Dayjs | null;
   important: boolean;
-  status: TodoSection;
+  category: TodoSection;
 };
 
 interface Props {
-  category: keyof TasksData;
+  taskToEdit: Task | null;
   handleAdd: (category: keyof TasksData, newTask: Task) => void;
   handleUpdate: (category: keyof TasksData, id: string, newTask: Task) => void;
   handleDelete: (category: keyof TasksData, id: string) => void;
@@ -36,7 +42,7 @@ interface Props {
 
 export const TaskForm = ({
   dialogTypeToOpen,
-  category,
+  taskToEdit,
   handleAdd,
   handleUpdate,
   handleDelete,
@@ -47,8 +53,32 @@ export const TaskForm = ({
     dateBegin: dayjs(),
     dateFinish: dayjs().add(1, "day"),
     important: false,
-    status: category,
+    category: "todo",
   });
+
+  useEffect(() => {
+    if (dialogTypeToOpen === "edit" && taskToEdit) {
+      setFormData({
+        title: taskToEdit.title,
+        description: taskToEdit.description,
+        dateBegin: dayjs(taskToEdit.dateBegin),
+        dateFinish: dayjs(taskToEdit.dateFinish),
+        important: taskToEdit.important,
+        category: taskToEdit.category,
+      });
+    }
+
+    if (dialogTypeToOpen === "add") {
+      setFormData({
+        title: "",
+        description: "",
+        dateBegin: dayjs(),
+        dateFinish: dayjs().add(1, "day"),
+        important: false,
+        category: "todo",
+      });
+    }
+  }, [dialogTypeToOpen, taskToEdit, taskToEdit?.category]);
 
   const { handleClose } = useTodoDialogs();
 
@@ -78,7 +108,7 @@ export const TaskForm = ({
   const handleStatusChange = useCallback((statusValue: TodoSection) => {
     setFormData((prev) => ({
       ...prev,
-      status: prev.status === statusValue ? "todo" : statusValue,
+      category: prev.category === statusValue ? "todo" : statusValue,
     }));
   }, []);
 
@@ -99,13 +129,13 @@ export const TaskForm = ({
       };
       switch (dialogTypeToOpen) {
         case "add":
-          handleAdd(formData.status, task);
+          handleAdd(formData.category, task);
           break;
         case "edit":
-          handleUpdate(formData.status, task.id, task);
+          handleUpdate(formData.category, task.id, task);
           break;
         case "delete":
-          handleDelete(formData.status, task.id);
+          handleDelete(formData.category, task.id);
           break;
       }
 
@@ -135,7 +165,7 @@ export const TaskForm = ({
           onDateChange={handleDateChange}
         />
         <StatusCheckboxes
-          status={formData.status}
+          status={formData.category}
           onStatusChange={handleStatusChange}
         />
         <ImportantCheckbox

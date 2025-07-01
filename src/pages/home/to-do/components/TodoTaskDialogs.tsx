@@ -10,7 +10,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export type ActionType = "add" | "edit" | "delete";
 interface Props {
-  category: keyof TasksData;
   handleAdd: (category: keyof TasksData, newTask: Task) => void;
   handleUpdate: (
     category: keyof TasksData,
@@ -20,13 +19,12 @@ interface Props {
   handleDelete: (category: keyof TasksData, id: string) => void;
 }
 export default function TodoTaskDialogs({
-  category,
   handleAdd,
   handleUpdate,
   handleDelete,
 }: Props) {
   const fullScreen: boolean = useMediaQuery("(min-width:600px)");
-  const { open, dialogTypeToOpen, handleClose } = useTodoDialogs();
+  const { open, dialogTypeToOpen, taskToEdit, handleClose } = useTodoDialogs();
 
   const actionTitles: Record<ActionType, string> = {
     add: "Create a new task",
@@ -46,7 +44,7 @@ export default function TodoTaskDialogs({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TaskForm
             dialogTypeToOpen={dialogTypeToOpen}
-            category={category}
+            taskToEdit={taskToEdit}
             handleAdd={handleAdd}
             handleUpdate={handleUpdate}
             handleDelete={handleDelete}

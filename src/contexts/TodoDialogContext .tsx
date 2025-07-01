@@ -6,8 +6,9 @@ type ActionType = "add" | "edit" | "delete";
 
 const TodoDialogContext = createContext<{
   open: boolean;
-  handleOpen: (dialogType: ActionType, taskToEdit?: Task) => void;
   dialogTypeToOpen: ActionType;
+  taskToEdit: Task | null;
+  handleOpen: (dialogType: ActionType, taskToEdit?: Task) => void;
   handleClose: () => void;
 } | null>(null);
 
@@ -18,17 +19,22 @@ export const TodoDialogProvider = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [dialogTypeToOpen, setdialogTypeToOpen] = useState<ActionType>("add");
+  const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
 
-  const handleOpen = (dialogType: ActionType, taskToEdit?: Task) => {
-    console.log("opa", open, dialogType, taskToEdit);
+  const handleOpen = (dialogType: ActionType, task?: Task) => {
     setdialogTypeToOpen(dialogType);
     setOpen(true);
+    setTaskToEdit(task || null);
+    console.log("opa", open, dialogType, taskToEdit);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setTaskToEdit(null);
+  };
 
   return (
     <TodoDialogContext.Provider
-      value={{ open, handleOpen, handleClose, dialogTypeToOpen }}
+      value={{ open, handleOpen, handleClose, dialogTypeToOpen, taskToEdit }}
     >
       {children}
     </TodoDialogContext.Provider>

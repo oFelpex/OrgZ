@@ -1,33 +1,38 @@
 {
   "todo": [
     {
-      "id": "cfd273ff-7699-4532-b8ab-54d214a28ec9",
-      "title": "asdsa",
-      "description": "dsadas",
-      "dateCreation": "2025-06-27T13:08:05.233Z",
-      "dateBegin": "2025-06-27T13:08:02.456Z",
-      "dateFinish": "2025-06-28T13:08:02.456Z",
-      "important": false
-    },
-    {
-      "id": "304cf1dd-9564-4f16-9795-6fed53e4cc91",
-      "title": "awdawddwa",
-      "description": "dwa",
-      "dateCreation": "2025-06-27T13:35:53.342Z",
-      "dateBegin": "2025-06-27T13:35:49.314Z",
-      "dateFinish": "2025-06-28T13:35:49.314Z",
-      "important": false
-    },
-    {
-      "id": "cec72999-b5ed-414b-bcf9-b49b685a7d38",
-      "title": "dsaddsa",
-      "description": "dasd",
-      "dateCreation": "2025-06-27T14:03:41.881Z",
-      "dateBegin": "2025-06-27T14:03:38.280Z",
-      "dateFinish": "2025-06-28T14:03:38.280Z",
-      "important": false
+      "id": "ee413d3c-dabb-43bb-ae28-bb290a37f9ec",
+      "title": "todo1",
+      "description": "",
+      "dateCreation": "2025-07-01T13:48:13.791Z",
+      "dateBegin": "2025-07-01T13:48:08.807Z",
+      "dateFinish": "2025-07-02T13:48:08.807Z",
+      "important": false,
+      "category": "todo"
     }
   ],
-  "onGoing": [],
-  "done": []
+  "onGoing": [
+    {
+      "id": "269eec20-ecc9-4346-af27-24de5275af17",
+      "title": "ongoing",
+      "description": "",
+      "dateCreation": "2025-07-01T13:48:20.357Z",
+      "dateBegin": "2025-07-01T13:48:15.649Z",
+      "dateFinish": "2025-07-02T13:48:15.649Z",
+      "important": false,
+      "category": "onGoing"
+    }
+  ],
+  "done": [
+    {
+      "id": "adc67a73-ae23-4215-970f-f1684cca6d73",
+      "title": "done importatnt",
+      "description": "",
+      "dateCreation": "2025-07-01T13:48:37.256Z",
+      "dateBegin": "2025-07-01T13:48:26.475Z",
+      "dateFinish": "2025-07-18T13:48:26.475Z",
+      "important": true,
+      "category": "done"
+    }
+  ]
 }

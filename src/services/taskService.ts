@@ -8,6 +8,7 @@ const createTask = (newTask: Task): Task => ({
   dateBegin: newTask.dateBegin,
   dateFinish: newTask.dateFinish,
   important: newTask.important,
+  category: newTask.category,
 });
 
 export const addTask = async (
@@ -73,7 +74,7 @@ export const updateTask = async (
     const response = await fetch(
       `http://localhost:3000/${category}/${taskId}`,
       {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

@@ -60,7 +60,6 @@ export default function TodoBoard() {
         >
           <Box display="flex" gap={1}>
             <TodoColumnButtons
-              category={"todo"}
               handleAdd={handleAdd}
               handleUpdate={handleUpdate}
               handleDelete={handleDelete}
@@ -137,7 +136,6 @@ export default function TodoBoard() {
         >
           <Box display="flex" gap={1}>
             <TodoColumnButtons
-              category={"todo"}
               handleAdd={handleAdd}
               handleUpdate={handleUpdate}
               handleDelete={handleDelete}
