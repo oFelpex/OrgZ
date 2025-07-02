@@ -117,8 +117,8 @@ export const TaskForm = ({
       e.preventDefault();
 
       const task: Task = {
-        id: crypto.randomUUID(),
-        dateCreation: new Date(),
+        id: taskToEdit?.id || crypto.randomUUID(),
+        dateCreation: taskToEdit?.dateCreation || new Date(),
         ...formData,
         dateBegin: formData.dateBegin
           ? formData.dateBegin.toDate()
@@ -142,6 +142,8 @@ export const TaskForm = ({
       handleClose();
     },
     [
+      taskToEdit?.id,
+      taskToEdit?.dateCreation,
       formData,
       dialogTypeToOpen,
       handleClose,

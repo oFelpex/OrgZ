@@ -72,13 +72,13 @@ export const updateTask = async (
 ): Promise<TasksData> => {
   try {
     const response = await fetch(
-      `http://localhost:3000/${category}/${taskId}`,
+      `http://localhost:3000/${category}/${updatedTask.id}`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ updatedTask }),
+        body: JSON.stringify({ ...updatedTask }),
       }
     );
 
@@ -87,11 +87,13 @@ export const updateTask = async (
     return {
       ...tasks,
       [category]: tasks[category].map((task) =>
-        task.id === taskId ? { ...task, updatedTask } : task
+        task.id === updatedTask.id ? { ...task, updatedTask } : task
       ),
     };
   } catch (error) {
     console.error("Erro em updateTask:", error);
+    console.log("Inicial", taskId);
+    console.log("nova", updatedTask.id);
     return tasks;
   }
 };
