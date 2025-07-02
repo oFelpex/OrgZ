@@ -172,7 +172,10 @@ export const TaskForm = ({
           checked={formData.important}
           onChange={handleCheckboxChange}
         />
-        <FormButtons onCancel={handleClose} />
+        <FormButtons
+          dialogTypeToOpen={dialogTypeToOpen}
+          onCancel={handleClose}
+        />
       </Stack>
     </form>
   );
